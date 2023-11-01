@@ -4,26 +4,28 @@ app.use(express.json())
 const dotenv = require('dotenv')
 const cors = require('cors')
 const connectDB = require('./config/db')
-const { chats } = require('./data')
+// const { chats } = require('./data')
 const userRoutes = require('./routes/userRoutes')
+const chatRoutes = require('./routes/chatRoutes')
 const {notFound,errorHandler} = require('./middlewares/errorMiddleware')
 dotenv.config()
 app.use(cors())
 
 const PORT = 5000 || process.env.PORT
 
-app.get('/api/chat',(req,res)=>{
-    res.send(chats)
-})
+// app.get('/api/chat',(req,res)=>{
+//     res.send(chats)
+// })
 
-app.get('/api/chat/:id',(req,res)=>{
-    console.log(req.params.id);
-    const singleChats = chats.find(e=>e._id===req.params.id)
-    res.send(singleChats);
-})
+// app.get('/api/chat/:id',(req,res)=>{
+//     console.log(req.params.id);
+//     const singleChats = chats.find(e=>e._id===req.params.id)
+//     res.send(singleChats);
+// })
 
 
 app.use('/api/user',userRoutes)
+app.use('/api/chat',chatRoutes)
 app.use(notFound)
 app.use(errorHandler)
 

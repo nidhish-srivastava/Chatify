@@ -67,8 +67,8 @@ const allUsers = asyncHandler(async(req,res)=>{
       { email: { $regex: req.query.search, $options: "i" } },
     ],
   } : {}
-  const users = await User.find(keyword)
-  // const users = await User.find(keyword).find({_id : {$ne : req.user._id}})
+  // const users = await User.find(keyword)
+  const users = await User.find(keyword).find({_id : {$ne : req.user._id}}) //* ne means not equal,it is used cuz we dont want the logged in user search result
   res.send(users)
 })
 
