@@ -8,7 +8,7 @@ const { chats } = require('./data')
 const userRoutes = require('./routes/userRoutes')
 const {notFound,errorHandler} = require('./middlewares/errorMiddleware')
 dotenv.config()
-cors()
+app.use(cors())
 
 const PORT = 5000 || process.env.PORT
 
@@ -22,8 +22,8 @@ app.get('/api/chat/:id',(req,res)=>{
     res.send(singleChats);
 })
 
-app.use('/api/user',userRoutes)
 
+app.use('/api/user',userRoutes)
 app.use(notFound)
 app.use(errorHandler)
 
